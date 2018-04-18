@@ -71,18 +71,18 @@ sl.append(sensor_loc[6])
 sl.append(sensor_loc[11])  
 
 
-'''This is the neural network, it has a 0.1 droprate, a 5 sensor input and 5 array output
+'''This is the neural network, it has a 0.5 droprate, a 5 sensor input and 5 array output
 Relu function is used for activation and a rms optimizer.
 We use a mean square error to track loss'''
 
 model = Sequential()
 #Layer 1
 model.add(Dense(80, init='lecun_uniform', input_dim = 5, activation = 'relu'))
-model.add(Dropout(0.1))
+model.add(Dropout(0.5))
     
 #Layer 2
 model.add(Dense(40, init='lecun_uniform',activation = 'relu'))
-model.add(Dropout(0.1))
+model.add(Dropout(0.5))
     
 model.add(Dense(3  , init='lecun_uniform',activation = 'linear'))
    
@@ -320,10 +320,7 @@ def learning():
 #             the_file.write(k+"\n")
 #==============================================================================
             
-            #This fits the Xtrain and ytrain to the model
-            #It may be problematic sending it in batches of such size in this manner.
-            #This started working only after trail and error, so can be one of the potential issues
-            #The training accuracy remains constant
+
             Training_X= np.array(Xtrain).reshape(batchSize,5)
             Training_Labels = np.array(ytrain).reshape(batchSize,3)
             time.sleep(0.01)
